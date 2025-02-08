@@ -19,7 +19,7 @@ export default function Chat() {
       {/* Background with Opacity */}
       <div className="relative flex min-h-screen w-full flex-col bg-img">
         {/* Opacity Layer */}
-        <div className="absolute inset-0 bg-gray-800 opacity-60 z-0 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gray-800 opacity-70 z-0 pointer-events-none"></div>
 
         {/* Navbar and Masthead */}
         <div className="relative z-10">

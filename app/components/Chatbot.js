@@ -4,36 +4,37 @@ import React, { useEffect, useState, useRef } from "react";
 import { useChat } from "ai/react";
 import { IoArrowBackSharp, IoArrowForward, IoSend } from "react-icons/io5";
 
-
 const Chatbot = () => {
-     const { messages, input, handleInputChange, handleSubmit } = useChat();
-      const [isOpen, setIsOpen] = useState(false);
-      const [showChatbot, setShowChatbot] = useState(false);
-      const bottomRef = useRef();
-    
-      const mongoSubmit = async () => {
-        const response = await fetch("/api/chat/sendChats", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: "fidel@gmail.com", messages }),
-        });
-        await response.json();
-      };
-    
-      const sendChats = async (e) => {
-        handleSubmit(e);
-        mongoSubmit();
-      };
-    
-      useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, [messages]);
-    
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [isOpen, setIsOpen] = useState(false);
+  const [showChatbot, setShowChatbot] = useState(false);
+  const bottomRef = useRef();
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    if (showChatbot && messages.length === 0) {
+      handleBotMessage(
+        "Hey bestie! 💜 How are you? Let me help you discover your career path!"
+      );
+    }
+  }, [showChatbot]);
+
+  const handleBotMessage = (text) => {
+    messages.push({ role: "assistant", content: text });
+  };
+
+  const sendChats = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    handleSubmit(e);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
- <div>
+    <div>
       {/* Chatbot Icon/Button */}
       <button
         onClick={() => setIsOpen(true)}
@@ -56,8 +57,8 @@ const Chatbot = () => {
               className="cursor-pointer relative h-[20px] transition-all duration-200 hover:right-[5px]"
             />
           </div>
-          <h2 className="text-[#8E5DF5] text-[18px] sm:text-[24px] h-[70px]">
-            Your Assistant is Ready
+          <h2 className="text-[#8E5DF5] text-xl sm:text-[20px] h-[70px]">
+            Your Career Assistant is Ready
           </h2>
           <img
             src="/chat-bot-icon.png"
@@ -66,7 +67,7 @@ const Chatbot = () => {
           />
           <button
             onClick={() => setShowChatbot(true)}
-            className="bg-[#BA53E1] text-white text:[16px] sm:text-[20px] rounded-[10px] shadow-[0px_3px_3px_0px_#00000040] w-[55vw] sm:w-[200px] p-2 flex items-center relative hover:top-[-2px] transition-top"
+            className="bg-[#BA53E1] text-white text:[16px] sm:text-[18px] rounded-[10px] shadow-[0px_3px_3px_0px_#00000040] w-[55vw] sm:w-[200px] p-2 flex items-center relative hover:top-[-2px] transition-top"
           >
             <p className="m-auto">Continue</p>
             <IoArrowForward className="ml-auto text-black" size={"1.5rem"} />
@@ -78,7 +79,7 @@ const Chatbot = () => {
         <div className="flex flex-col min-h-screen bg-gray-900 text-white fixed bottom-0 right-0 w-[90%] sm:w-[400px] h-[90%] z-50 shadow-2xl">
           {/* Chat Header */}
           <div className="flex items-center justify-between p-4 bg-gray-800 border-b border-gray-600">
-            <h1 className="text-xl font-semibold">Assistant</h1>
+            <h1 className="text-xl font-semibold">Career Bestie 🤖💜</h1>
             <button onClick={() => setIsOpen(false)} className="text-red-400">
               Close
             </button>
@@ -89,7 +90,7 @@ const Chatbot = () => {
             {messages.map((m, index) => (
               <div
                 key={index}
-                className={`p-2 rounded-lg mb-2 ${
+                className={`p-3 rounded-lg mb-2 max-w-[75%] ${
                   m.role === "user"
                     ? "bg-blue-500 self-end text-white"
                     : "bg-gray-700 text-white"
@@ -119,6 +120,8 @@ const Chatbot = () => {
           </form>
         </div>
       )}
-    </div>  )
-}
-export default Chatbot
+    </div>
+  );
+};
+
+export default Chatbot;

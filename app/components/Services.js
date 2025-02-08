@@ -1,46 +1,11 @@
 const Services = () => {
-  const services = [
-    {
-      icon: "bi-link-45deg",
-      title: "Blockchain Security",
-      desc: "Secure your career data and achievements with the power of decentralized blockchain technology.",
-    },
-    {
-      icon: "bi-robot",
-      title: "AI-Powered Recommendations",
-      desc: "Get personalized career suggestions based on your skills, interests, and goals.",
-    },
-    {
-      icon: "bi-award",
-      title: "Verified Certifications",
-      desc: "Earn blockchain-verified certifications to showcase your skills with credibility.",
-    },
-    {
-      icon: "bi-people",
-      title: "Career Networking",
-      desc: "Connect with like-minded professionals and build valuable career relationships.",
-    },
-    {
-      icon: "bi-graph-up",
-      title: "Skill Growth Insights",
-      desc: "Track your progress and receive guidance on which skills to improve for career success.",
-    },
-    {
-      icon: "bi-wallet2",
-      title: "Incentivized Learning",
-      desc: "Earn rewards while learning new skills through a gamified, blockchain-powered system.",
-    },
-    {
-      icon: "bi-briefcase",
-      title: "Job Matching",
-      desc: "Access job opportunities that match your profile and preferences using advanced AI algorithms.",
-    },
-    {
-      icon: "bi-gear",
-      title: "Customizable Profiles",
-      desc: "Showcase your achievements and skills with a professional, blockchain-secured profile.",
-    },
-  ];
+ const services = [
+  { title: "Career Guidance", desc: "Get data-driven AI career recommendations." },
+  { title: "Incentivized Learning", desc: "Earn rewards for completing courses." },
+  { title: "AI Course Suggestions", desc: "Receive AI-recommended courses based on your career path." },
+  { title: "Certificate Verification", desc: "Showcase verified certifications securely." },
+];
+
 
   return (
     <section id="services" className="py-16">

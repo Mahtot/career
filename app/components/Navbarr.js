@@ -6,7 +6,6 @@ const Navbar = () => {
   const menuItems = ["About", "Services",];
   const [isScrolled, setIsScrolled] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [walletAddress, setWalletAddress] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,25 +25,6 @@ const Navbar = () => {
 
   const handleLinkClick = () => {
     setShowMenu(false); 
-  };
-
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        setWalletAddress(accounts[0]); // Save connected address
-        console.log("Connected: ", accounts[0]);
-      } catch (error) {
-        console.error("Error connecting wallet:", error);
-      }
-    } else {
-      alert("MetaMask not detected. Please install it.");
-    }
-  };
-
-  const disconnectWallet = () => {
-    setWalletAddress(null);
-    console.log("Wallet disconnected");
   };
 
   return (
@@ -87,54 +67,6 @@ const Navbar = () => {
               {item}
             </Link>
           ))}
-
-          {/* <button
-            onClick={walletAddress ? disconnectWallet : connectWallet}
-            className=" text-white font-semibold px-4 py-2 rounded-lg hover:bg-purple-500 transition"
-          >
-            {walletAddress ? `Disconnect (${walletAddress.slice(0, 6)}...)` : "Connect Wallet"}
-          </button> */}
-
-        <button
-          onClick={walletAddress ? disconnectWallet : connectWallet}
-          className="relative px-6 py-2 text-white font-semibold rounded-lg overflow-hidden border-2 border-transparent"
-        >
-          <span className="relative z-10">
-            {walletAddress ? `Connected (${walletAddress.slice(0, 7)}...)` : "Connect Wallet"}
-          </span>
-
-          {/* Moving & Glowing Border Effect */}
-          <div className="absolute inset-0 border-2 border-purple-700 rounded-lg animate-border glow"></div>
-
-      
-          <style jsx>{`
-            @keyframes borderMove {
-              0% { clip-path: inset(0 0 97% 0); }
-              25% { clip-path: inset(0 97% 0 0); }
-              50% { clip-path: inset(97% 0 0 0); }
-              75% { clip-path: inset(0 0 0 97%); }
-              100% { clip-path: inset(0 0 97% 0); }
-            }
-
-            .animate-border {
-              animation: borderMove 3s linear infinite;
-            }
-
-            .glow {
-              box-shadow: 0 0 15px rgba(0, 102, 255, 0.8),
-                          0 0 30px rgba(0, 102, 255, 0.6),
-                          0 0 45px rgba(0, 102, 255, 0.4);
-            }
-
-            button {
-              position: relative;
-              right: 5px; 
-            }
-          `}</style>
-        </button>
-
-
-
         </div>
       </div>
     </nav>
