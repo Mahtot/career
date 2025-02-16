@@ -1,20 +1,36 @@
-"use client";
-
-import React from "react";
-
+'use client';
+import React, { useState, useEffect } from "react";
 import Chatbot from "./components/Chatbot";
 import Navbar from "./components/Navbar";
 import Masthead from "./components/Masthead";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Services from "./components/Services";
-import Portfolio from "./components/Portifolio";
 
 export default function Chat() {
+  const [hasProfile, setHasProfile] = useState(false);
+
+  useEffect(() => {
+    // Function to check if profile exists
+    const checkProfile = () => {
+      const profile = localStorage.getItem("userProfile");
+      setHasProfile(!!profile); // Update the state based on profile existence
+    };
+
+    checkProfile(); // Check on mount
+
+    // Listen for profile updates in localStorage
+    window.addEventListener("storage", checkProfile);
+
+    return () => {
+      window.removeEventListener("storage", checkProfile);
+    };
+  }, []);
+
   return (
     <div className="page-top">
-      {/* Chatbot */}
-      <Chatbot />
+      {/* Show Chatbot only if user has a profile */}
+      {hasProfile && <Chatbot />}
 
       {/* Background with Opacity */}
       <div className="relative flex min-h-screen w-full flex-col bg-img">
@@ -31,7 +47,6 @@ export default function Chat() {
       {/* Content Sections */}
       <About />
       <Services />
-      {/* <Portfolio /> */}
       <Footer />
     </div>
   );
