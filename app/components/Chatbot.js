@@ -17,7 +17,7 @@ const Chatbot = () => {
   useEffect(() => {
     if (showChatbot && messages.length === 0) {
       handleBotMessage(
-        "Hey bestie! 💜 How are you? Let me help you discover your career path!"
+        "Hey bestie! 💜 How are you? Let me help you discover your career path!!"
       );
     }
   }, [showChatbot]);
@@ -114,7 +114,10 @@ const Chatbot = () => {
               onChange={handleInputChange}
               className="flex-grow p-2 bg-gray-700 text-white rounded-lg outline-none"
             />
-            <button type="submit" className="text-white bg-blue-500 p-2 rounded-lg">
+            <button
+              type="submit"
+              className="text-white bg-blue-500 p-2 rounded-lg"
+            >
               <IoSend size={"1.5rem"} />
             </button>
           </form>
