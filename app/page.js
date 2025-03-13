@@ -34,7 +34,7 @@ export default function Chat() {
   return (
     <div className="page-top">
       {/* Chatbot shown only if user has profile */}
-      {hasProfile && <Chatbot />}
+      {<Chatbot />}
 
       {/* Hero Section with background overlay */}
       <div className="relative flex min-h-screen w-full flex-col bg-img">
